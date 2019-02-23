@@ -7,8 +7,6 @@ like:
 [INFO    ][2019-02-23 03:11:36.414] Merticol service starting
 ```
 
-This library allows specifying logging level and level padding
-
 ## parameters
 
 - `TimestampFormat` - datetime format
