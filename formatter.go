@@ -30,7 +30,7 @@ type Formatter struct {
 	// Also can include custom fields but limited to strings.
 	// All of fields need to be wrapped inside %% i.e %time% %msg%
 	LogFormat string
-	LevelPad int
+	LevelPad  int
 }
 
 // Format building log message.
@@ -40,21 +40,22 @@ func (f *Formatter) Format(entry *logrus.Entry) ([]byte, error) {
 		output = defaultLogFormat
 	}
 
-	timestampFormat := f.TimestampFormat
-	if timestampFormat == "" {
-		timestampFormat = defaultTimestampFormat
+	if f.TimestampFormat == "" {
+		f.TimestampFormat = defaultTimestampFormat
 	}
 
-	output = strings.Replace(output, "%time%", entry.Time.Format(timestampFormat), 1)
-
+	// replace timestamp
+	output = strings.Replace(output, "%time%", entry.Time.Format(f.TimestampFormat), 1)
+	// replace message text
 	output = strings.Replace(output, "%msg%", entry.Message, 1)
-
+	// replace level
 	level := strings.ToUpper(entry.Level.String())
 	if f.LevelPad != 0 {
 		level = padRight(level, " ", f.LevelPad)
 	}
 	output = strings.Replace(output, "%lvl%", level, 1)
 
+	// replace data
 	for k, v := range entry.Data {
 		if s, ok := v.(string); ok {
 			output = strings.Replace(output, "%"+k+"%", s, 1)
