@@ -1,12 +1,22 @@
 # logrus-levelpad-formatter
 
-Logrus (https://github.com/sirupsen/logrus) formatter with messages like
+Logrus (https://github.com/sirupsen/logrus) formatter allows to specify log level with padding and produces messages 
+like:
 
 ```
-[INFO]: 2006-01-02T15:04:05Z07:00 - Log message
+[INFO    ][2019-02-23 03:11:36.414] Merticol service starting
 ```
 
-Configure
+This library allows specifying logging level and level padding
+
+## parameters
+
+- `TimestampFormat` - datetime format
+- `LogFormat` - whole log entry format, you can specify extra params such as `%lvl%` (level: info, warn, error...) and 
+`%time%` (timestamp previously formatted using `TimestampFormat` directive) 
+- `LevelPad` - padding for `%lvl%` parameter, when `0` then no padding will be applied.
+
+## example configuration
 
 ```
 import (
