@@ -4,7 +4,7 @@ Logrus (https://github.com/sirupsen/logrus) formatter allows to specify log leve
 like:
 
 ```
-[INFO    ][2019-02-23 03:11:36.414] Merticol service starting
+[INFO    ][2019-02-23 03:11:36.414] Service starting
 ```
 
 ## parameters
